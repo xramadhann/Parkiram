@@ -16,7 +16,7 @@ class Parkiram extends StatelessWidget {
           colorScheme: ColorScheme.fromSeed(
               seedColor: const Color.fromARGB(255, 3, 5, 94)),
           useMaterial3: true,
-          textTheme: GoogleFonts.latoTextTheme()),
+          textTheme: GoogleFonts.righteousTextTheme()),
       debugShowCheckedModeBanner: false,
       home: const HomePage(),
     );
