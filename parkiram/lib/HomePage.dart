@@ -1,3 +1,5 @@
+// ignore_for_file: file_names
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -7,6 +9,15 @@ class HomePage extends StatefulWidget {
   @override
   State<HomePage> createState() => _HomePageState();
 }
+
+List<String> imageAssets = [
+  'assets/images/IconFilter/car.png',
+  'assets/images/IconFilter/electric-car.png',
+  'assets/images/IconFilter/scooter.png',
+  'assets/images/IconFilter/bicycle.png',
+  'assets/images/IconFilter/bus.png',
+  'assets/images/IconFilter/truck.png',
+];
 
 class _HomePageState extends State<HomePage> {
   @override
@@ -21,9 +32,36 @@ class _HomePageState extends State<HomePage> {
             height: constraints.maxHeight,
             child: Stack(
               children: [
-                // TextField Search
                 Positioned(
-                  top: 200,
+                  top: 120,
+                  left: 20,
+                  right: 20,
+                  child: SizedBox(
+                    height: 120,
+                    child: GridView.count(
+                      crossAxisCount: 6,
+                      crossAxisSpacing: 10,
+                      mainAxisSpacing: 10,
+                      children: List.generate(6, (index) {
+                        return Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            color: Colors.white,
+                          ),
+                          child: Center(
+                            child: Image.asset(
+                              imageAssets[index],
+                              width: 40,
+                              height: 40,
+                            ),
+                          ),
+                        );
+                      }),
+                    ),
+                  ),
+                ),
+                Positioned(
+                  top: 220,
                   left: 20,
                   right: 20,
                   child: SizedBox(
@@ -123,7 +161,6 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ),
 
-                // Header
                 Positioned(
                   top: 60,
                   left: 20,
@@ -155,7 +192,7 @@ class _HomePageState extends State<HomePage> {
                   top: 48,
                   right: 20,
                   child: Image.asset(
-                    'assets/images/LogoPutihBiru.png',
+                    'assets/images/Logo/LogoPutihBiru.png',
                     height: 80,
                   ),
                 ),
@@ -243,7 +280,7 @@ class ParkingCard extends StatelessWidget {
             ),
             child: Center(
               child: Image.asset(
-                'assets/images/Logo.png',
+                'assets/images/Logo/Logo.png',
                 width: 80,
               ),
             ),
