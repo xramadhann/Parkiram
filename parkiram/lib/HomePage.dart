@@ -57,7 +57,7 @@ class _HomePageState extends State<HomePage> {
                           minHeight: 40,
                         ),
                         contentPadding:
-                            const EdgeInsets.symmetric(vertical: 12),
+                            const EdgeInsets.symmetric(vertical: 20),
                       ),
                     ),
                   ),
@@ -125,7 +125,7 @@ class _HomePageState extends State<HomePage> {
 
                 // Header
                 Positioned(
-                  top: 40,
+                  top: 60,
                   left: 20,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -152,7 +152,7 @@ class _HomePageState extends State<HomePage> {
 
                 // Logo
                 Positioned(
-                  top: 28,
+                  top: 48,
                   right: 20,
                   child: Image.asset(
                     'assets/images/LogoPutihBiru.png',
@@ -186,14 +186,14 @@ class ParkingCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.only(bottom: 15),
-      padding: const EdgeInsets.all(15),
+      margin: const EdgeInsets.only(bottom: 10),
+      padding: const EdgeInsets.only(top: 20, bottom: 20, left: 30, right: 30),
       decoration: BoxDecoration(
         color: const Color.fromARGB(255, 3, 5, 94),
         borderRadius: BorderRadius.circular(12),
       ),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        mainAxisAlignment: MainAxisAlignment.start,
         children: [
           Expanded(
             child: Column(
@@ -224,7 +224,7 @@ class ParkingCard extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  "+$priceNextHour/Jam Berikutnya",
+                  "*$priceNextHour/Jam Berikutnya",
                   style: GoogleFonts.righteous(
                     fontSize: 12,
                     color: Colors.white,
@@ -233,9 +233,10 @@ class ParkingCard extends StatelessWidget {
               ],
             ),
           ),
+          SizedBox(width: 30),
           Container(
-            width: 100,
-            height: 100,
+            width: 110,
+            height: 110,
             decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.circular(10),
