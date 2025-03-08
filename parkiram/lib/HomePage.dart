@@ -2,6 +2,10 @@
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
+import 'package:parkiram/ViewModels/LocationParkiramViewModels.dart';
+
+import 'Widget/LocationParkiramWidget.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -22,6 +26,8 @@ List<String> imageAssets = [
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
+    final parkingViewModel =
+        Provider.of<ParkingViewModel>(context, listen: false);
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: const Color.fromARGB(255, 3, 5, 94),
@@ -130,30 +136,18 @@ class _HomePageState extends State<HomePage> {
 
                         // ListView untuk menampilkan daftar parkiran
                         Expanded(
-                          child: ListView(
-                            children: const [
-                              ParkingCard(
-                                title: "Kalibata City",
-                                address:
-                                    "Jl. Raya Kalibata, Kec. Pancoran, Kota Jakarta Selatan, 12750",
-                                priceFirstHour: "Rp.5000",
-                                priceNextHour: "Rp.1000",
-                              ),
-                              ParkingCard(
-                                title: "Basurra City",
-                                address:
-                                    "Jl. Jenderal Basuki Rachmat, Kec. Jatinegara, Kota Jakarta Timur, 13410",
-                                priceFirstHour: "Rp.3000",
-                                priceNextHour: "Rp.1000",
-                              ),
-                              ParkingCard(
-                                title: "Plaza Kalibata",
-                                address:
-                                    "Jl. Raya Kalibata,Kec. Pancoran,Kota Jakarta Selatan, 12750",
-                                priceFirstHour: "Rp.3000",
-                                priceNextHour: "Rp.1000",
-                              ),
-                            ],
+                          child: ListView.builder(
+                            itemCount: parkingViewModel.parkingList.length,
+                            itemBuilder: (context, index) {
+                              final parking =
+                                  parkingViewModel.parkingList[index];
+                              return ParkingCard(
+                                title: parking.title,
+                                address: parking.address,
+                                priceFirstHour: parking.priceFirstHour,
+                                priceNextHour: parking.priceNextHour,
+                              );
+                            },
                           ),
                         ),
                       ],
@@ -200,91 +194,6 @@ class _HomePageState extends State<HomePage> {
             ),
           );
         },
-      ),
-    );
-  }
-}
-
-class ParkingCard extends StatelessWidget {
-  final String title;
-  final String address;
-  final String priceFirstHour;
-  final String priceNextHour;
-
-  const ParkingCard({
-    super.key,
-    required this.title,
-    required this.address,
-    required this.priceFirstHour,
-    required this.priceNextHour,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.only(bottom: 10),
-      padding: const EdgeInsets.only(top: 20, bottom: 20, left: 30, right: 30),
-      decoration: BoxDecoration(
-        color: const Color.fromARGB(255, 3, 5, 94),
-        borderRadius: BorderRadius.circular(12),
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  title,
-                  style: GoogleFonts.righteous(
-                    fontSize: 24,
-                    color: Colors.white,
-                  ),
-                ),
-                const SizedBox(height: 5),
-                Text(
-                  address,
-                  style: GoogleFonts.righteous(
-                    fontSize: 12,
-                    color: Colors.white,
-                  ),
-                ),
-                const SizedBox(height: 8),
-                Text(
-                  "$priceFirstHour/Jam Pertama",
-                  style: GoogleFonts.righteous(
-                    fontSize: 14,
-                    color: Colors.yellow,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                Text(
-                  "*$priceNextHour/Jam Berikutnya",
-                  style: GoogleFonts.righteous(
-                    fontSize: 12,
-                    color: Colors.white,
-                  ),
-                ),
-              ],
-            ),
-          ),
-          SizedBox(width: 30),
-          Container(
-            width: 110,
-            height: 110,
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(10),
-            ),
-            child: Center(
-              child: Image.asset(
-                'assets/images/Logo/Logo.png',
-                width: 80,
-              ),
-            ),
-          ),
-        ],
       ),
     );
   }
