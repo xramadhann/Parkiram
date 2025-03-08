@@ -11,12 +11,12 @@ class HomePage extends StatefulWidget {
 }
 
 List<String> imageAssets = [
-  'assets/images/IconFilter/car.png',
-  'assets/images/IconFilter/electric-car.png',
-  'assets/images/IconFilter/scooter.png',
-  'assets/images/IconFilter/bicycle.png',
-  'assets/images/IconFilter/bus.png',
-  'assets/images/IconFilter/truck.png',
+  'assets/images/IconFilter/car1.png',
+  'assets/images/IconFilter/electric-car1.png',
+  'assets/images/IconFilter/scooter1.png',
+  'assets/images/IconFilter/bicycle1.png',
+  'assets/images/IconFilter/bus1.png',
+  'assets/images/IconFilter/truck1.png',
 ];
 
 class _HomePageState extends State<HomePage> {
@@ -33,7 +33,7 @@ class _HomePageState extends State<HomePage> {
             child: Stack(
               children: [
                 Positioned(
-                  top: 120,
+                  top: 170,
                   left: 20,
                   right: 20,
                   child: SizedBox(
@@ -51,8 +51,8 @@ class _HomePageState extends State<HomePage> {
                           child: Center(
                             child: Image.asset(
                               imageAssets[index],
-                              width: 40,
-                              height: 40,
+                              width: 100,
+                              height: 100,
                             ),
                           ),
                         );
@@ -61,7 +61,7 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ),
                 Positioned(
-                  top: 220,
+                  top: 270,
                   left: 20,
                   right: 20,
                   child: SizedBox(
