@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:parkiram/HomePage.dart';
 
 void main() {
   runApp(const Parkiram());
@@ -11,10 +13,12 @@ class Parkiram extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-      ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+          colorScheme: ColorScheme.fromSeed(
+              seedColor: const Color.fromARGB(255, 3, 5, 94)),
+          useMaterial3: true,
+          textTheme: GoogleFonts.righteousTextTheme()),
+      debugShowCheckedModeBanner: false,
+      home: const HomePage(),
     );
   }
 }
