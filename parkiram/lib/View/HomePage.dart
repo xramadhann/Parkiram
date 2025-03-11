@@ -2,6 +2,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:parkiram/Models/FilterParkiramModels.dart';
+import 'package:parkiram/ViewModels/FilterParkiramViewModels.dart';
 import 'package:provider/provider.dart';
 import 'package:parkiram/ViewModels/LocationParkiramViewModels.dart';
 
@@ -26,8 +28,7 @@ List<String> imageAssets = [
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
-    final parkingViewModel =
-        Provider.of<ParkingViewModel>(context, listen: false);
+    Provider.of<ParkingViewModel>(context, listen: false);
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: const Color.fromARGB(255, 3, 5, 94),
@@ -39,30 +40,75 @@ class _HomePageState extends State<HomePage> {
             child: Stack(
               children: [
                 Positioned(
+                  top: 60,
+                  left: 20,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: const [
+                      Text(
+                        "Selamat Datang di,",
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w500,
+                          color: Colors.white,
+                        ),
+                      ),
+                      Text(
+                        "PARKIRAM",
+                        style: TextStyle(
+                          fontSize: 24,
+                          fontWeight: FontWeight.w900,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Positioned(
                   top: 170,
                   left: 20,
                   right: 20,
                   child: SizedBox(
                     height: 120,
-                    child: GridView.count(
-                      crossAxisCount: 6,
-                      crossAxisSpacing: 10,
-                      mainAxisSpacing: 10,
-                      children: List.generate(6, (index) {
-                        return Container(
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                            color: Colors.white,
-                          ),
-                          child: Center(
-                            child: Image.asset(
-                              imageAssets[index],
-                              width: 100,
-                              height: 100,
-                            ),
-                          ),
+                    child: Consumer<FilterViewModel>(
+                      builder: (context, filterViewModel, child) {
+                        return GridView.count(
+                          crossAxisCount: 6,
+                          crossAxisSpacing: 10,
+                          mainAxisSpacing: 10,
+                          children:
+                              List.generate(vehicleFilters.length, (index) {
+                            final filter = vehicleFilters[index];
+                            bool isSelected =
+                                filterViewModel.selectedFilter == filter.type;
+
+                            return GestureDetector(
+                              onTap: () {
+                                filterViewModel.selectFilter(filter.type);
+                                Provider.of<ParkingViewModel>(context,
+                                        listen: false)
+                                    .applyFilter(
+                                        filterViewModel.selectedFilter);
+                              },
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10),
+                                  color: isSelected
+                                      ? Colors.yellow
+                                      : Colors.white, // Highlight jika terpilih
+                                ),
+                                child: Center(
+                                  child: Image.asset(
+                                    filter.imagePath,
+                                    width: 50,
+                                    height: 50,
+                                  ),
+                                ),
+                              ),
+                            );
+                          }),
                         );
-                      }),
+                      },
                     ),
                   ),
                 ),
@@ -133,19 +179,46 @@ class _HomePageState extends State<HomePage> {
                           ),
                         ),
                         const SizedBox(height: 10),
-
-                        // ListView untuk menampilkan daftar parkiran
                         Expanded(
-                          child: ListView.builder(
-                            itemCount: parkingViewModel.parkingList.length,
-                            itemBuilder: (context, index) {
-                              final parking =
-                                  parkingViewModel.parkingList[index];
-                              return ParkingCard(
-                                title: parking.title,
-                                address: parking.address,
-                                priceFirstHour: parking.priceFirstHour,
-                                priceNextHour: parking.priceNextHour,
+                          child: Consumer<ParkingViewModel>(
+                            builder: (context, parkingViewModel, child) {
+                              if (parkingViewModel.parkingList.isEmpty) {
+                                return Center(
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Image.asset(
+                                        'assets/images/IconFilter/noservice.gif', // Ganti dengan gambar yang sesuai
+                                        width: 150,
+                                        height: 150,
+                                      ),
+                                      SizedBox(height: 20),
+                                      Text(
+                                        "Mohon maaf layanan untuk kendaraan tersebut belum tersedia",
+                                        style: TextStyle(
+                                          fontSize: 16,
+                                          color: const Color.fromARGB(
+                                              255, 3, 5, 94),
+                                        ),
+                                        textAlign: TextAlign.center,
+                                      ),
+                                    ],
+                                  ),
+                                );
+                              }
+
+                              return ListView.builder(
+                                itemCount: parkingViewModel.parkingList.length,
+                                itemBuilder: (context, index) {
+                                  final parking =
+                                      parkingViewModel.parkingList[index];
+                                  return ParkingCard(
+                                    title: parking.title,
+                                    address: parking.address,
+                                    priceFirstHour: parking.priceFirstHour,
+                                    priceNextHour: parking.priceNextHour,
+                                  );
+                                },
                               );
                             },
                           ),
@@ -154,34 +227,6 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ),
                 ),
-
-                Positioned(
-                  top: 60,
-                  left: 20,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: const [
-                      Text(
-                        "Selamat Datang di,",
-                        style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w500,
-                          color: Colors.white,
-                        ),
-                      ),
-                      Text(
-                        "PARKIRAM",
-                        style: TextStyle(
-                          fontSize: 24,
-                          fontWeight: FontWeight.w900,
-                          color: Colors.white,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-
-                // Logo
               ],
             ),
           );

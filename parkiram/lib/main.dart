@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:parkiram/View/HomePage.dart';
+import 'package:parkiram/ViewModels/FilterParkiramViewModels.dart';
 import 'package:provider/provider.dart';
 
 import 'ViewModels/LocationParkiramViewModels.dart';
@@ -17,6 +18,7 @@ class Parkiram extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (context) => ParkingViewModel()),
+        ChangeNotifierProvider(create: (context) => FilterViewModel()),
       ],
       child: MaterialApp(
         title: 'Parkiram App',
