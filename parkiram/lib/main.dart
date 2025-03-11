@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:parkiram/HomePage.dart';
+import 'package:parkiram/View/HomePage.dart';
 import 'package:provider/provider.dart';
 
 import 'ViewModels/LocationParkiramViewModels.dart';

@@ -30,38 +30,60 @@ class ParkingCard extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                Text(
-                  title,
-                  style: GoogleFonts.righteous(
-                    fontSize: 24,
-                    color: Colors.white,
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        title,
+                        style: GoogleFonts.righteous(
+                          fontSize: 24,
+                          color: Colors.white,
+                        ),
+                      ),
+                      const SizedBox(height: 5),
+                      Text(
+                        address,
+                        style: GoogleFonts.righteous(
+                          fontSize: 12,
+                          color: Colors.white,
+                        ),
+                      ),
+                      const SizedBox(height: 8),
+                      Text(
+                        "$priceFirstHour/Jam Pertama",
+                        style: GoogleFonts.righteous(
+                          fontSize: 14,
+                          color: Colors.yellow,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      Text(
+                        "*$priceNextHour/Jam Berikutnya",
+                        style: GoogleFonts.righteous(
+                          fontSize: 12,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ],
                   ),
                 ),
-                const SizedBox(height: 5),
-                Text(
-                  address,
-                  style: GoogleFonts.righteous(
-                    fontSize: 12,
+                SizedBox(width: 30),
+                Container(
+                  width: 110,
+                  height: 110,
+                  decoration: BoxDecoration(
                     color: Colors.white,
+                    borderRadius: BorderRadius.circular(10),
                   ),
-                ),
-                const SizedBox(height: 8),
-                Text(
-                  "$priceFirstHour/Jam Pertama",
-                  style: GoogleFonts.righteous(
-                    fontSize: 14,
-                    color: Colors.yellow,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                Text(
-                  "*$priceNextHour/Jam Berikutnya",
-                  style: GoogleFonts.righteous(
-                    fontSize: 12,
-                    color: Colors.white,
+                  child: Center(
+                    child: Image.asset(
+                      'assets/images/Logo/Logo.png',
+                      width: 80,
+                    ),
                   ),
                 ),
               ],

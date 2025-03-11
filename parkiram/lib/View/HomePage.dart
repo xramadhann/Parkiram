@@ -5,7 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:parkiram/ViewModels/LocationParkiramViewModels.dart';
 
-import 'Widget/LocationParkiramWidget.dart';
+import '../Widget/LocationParkiramWidget.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -182,14 +182,6 @@ class _HomePageState extends State<HomePage> {
                 ),
 
                 // Logo
-                Positioned(
-                  top: 48,
-                  right: 20,
-                  child: Image.asset(
-                    'assets/images/Logo/LogoPutihBiru.png',
-                    height: 80,
-                  ),
-                ),
               ],
             ),
           );
