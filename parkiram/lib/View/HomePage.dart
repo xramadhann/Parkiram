@@ -4,10 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:parkiram/Models/FilterParkiramModels.dart';
 import 'package:parkiram/ViewModels/FilterParkiramViewModels.dart';
+import 'package:parkiram/Widget/LocationParkiramWidget.dart';
 import 'package:provider/provider.dart';
 import 'package:parkiram/ViewModels/LocationParkiramViewModels.dart';
-
-import '../Widget/LocationParkiramWidget.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -15,15 +14,6 @@ class HomePage extends StatefulWidget {
   @override
   State<HomePage> createState() => _HomePageState();
 }
-
-List<String> imageAssets = [
-  'assets/images/IconFilter/car1.png',
-  'assets/images/IconFilter/electric-car1.png',
-  'assets/images/IconFilter/scooter1.png',
-  'assets/images/IconFilter/bicycle1.png',
-  'assets/images/IconFilter/bus1.png',
-  'assets/images/IconFilter/truck1.png',
-];
 
 class _HomePageState extends State<HomePage> {
   @override
@@ -65,6 +55,16 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ),
                 Positioned(
+                  top: 48,
+                  right: 20,
+                  child: Image.asset(
+                    "assets/images/Logo/LogoPutihBiru.png",
+                    width: 80,
+                    height: 80,
+                    fit: BoxFit.contain,
+                  ),
+                ),
+                Positioned(
                   top: 170,
                   left: 20,
                   right: 20,
@@ -94,8 +94,8 @@ class _HomePageState extends State<HomePage> {
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(10),
                                   color: isSelected
-                                      ? Colors.yellow
-                                      : Colors.white, // Highlight jika terpilih
+                                      ? const Color.fromARGB(255, 246, 255, 0)
+                                      : Colors.white,
                                 ),
                                 child: Center(
                                   child: Image.asset(
@@ -118,42 +118,46 @@ class _HomePageState extends State<HomePage> {
                   right: 20,
                   child: SizedBox(
                     height: 45,
-                    child: TextField(
-                      style: GoogleFonts.righteous(
-                        color: const Color.fromARGB(255, 3, 5, 94),
-                        fontSize: 20,
-                        fontWeight: FontWeight.w400,
-                        letterSpacing: 0.5,
-                      ),
-                      decoration: InputDecoration(
-                        filled: true,
-                        fillColor: Colors.white,
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(8),
-                          borderSide: BorderSide.none,
-                        ),
-                        hintText: "Yuk cari PARKIRAM terdekat",
-                        hintStyle: GoogleFonts.righteous(
-                          color: const Color.fromARGB(132, 3, 5, 94),
-                          fontSize: 16,
-                          fontWeight: FontWeight.w400,
-                        ),
-                        prefixIcon: const Padding(
-                          padding: EdgeInsets.only(left: 10, right: 10),
-                          child: Icon(Icons.search, size: 24),
-                        ),
-                        prefixIconConstraints: const BoxConstraints(
-                          minWidth: 40,
-                          minHeight: 40,
-                        ),
-                        contentPadding:
-                            const EdgeInsets.symmetric(vertical: 20),
-                      ),
+                    child: Consumer<ParkingViewModel>(
+                      builder: (context, parkingViewModel, child) {
+                        return TextField(
+                          onChanged: (value) =>
+                              parkingViewModel.searchParking(value),
+                          style: GoogleFonts.righteous(
+                            color: const Color.fromARGB(255, 3, 5, 94),
+                            fontSize: 20,
+                            fontWeight: FontWeight.w400,
+                            letterSpacing: 0.5,
+                          ),
+                          decoration: InputDecoration(
+                            filled: true,
+                            fillColor: Colors.white,
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(8),
+                              borderSide: BorderSide.none,
+                            ),
+                            hintText: "Cari tempat parkir...",
+                            hintStyle: GoogleFonts.righteous(
+                              color: const Color.fromARGB(132, 3, 5, 94),
+                              fontSize: 16,
+                              fontWeight: FontWeight.w400,
+                            ),
+                            prefixIcon: const Padding(
+                              padding: EdgeInsets.only(left: 10, right: 10),
+                              child: Icon(Icons.search, size: 24),
+                            ),
+                            prefixIconConstraints: const BoxConstraints(
+                              minWidth: 40,
+                              minHeight: 40,
+                            ),
+                            contentPadding:
+                                const EdgeInsets.symmetric(vertical: 20),
+                          ),
+                        );
+                      },
                     ),
                   ),
                 ),
-
-                // Container Putih
                 Positioned(
                   bottom: 0,
                   left: 0,
@@ -188,20 +192,24 @@ class _HomePageState extends State<HomePage> {
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
                                       Image.asset(
-                                        'assets/images/IconFilter/noservice.gif', // Ganti dengan gambar yang sesuai
+                                        'assets/images/IconFilter/noservice.gif',
                                         width: 150,
                                         height: 150,
                                       ),
-                                      SizedBox(height: 20),
+                                      const SizedBox(height: 10),
                                       Text(
-                                        "Mohon maaf layanan untuk kendaraan tersebut belum tersedia",
-                                        style: TextStyle(
+                                        parkingViewModel.searchQuery.isNotEmpty
+                                            ? "Parkiram tidak ditemukan"
+                                            : (parkingViewModel
+                                                        .selectedFilter !=
+                                                    null
+                                                ? "Belum ada Parkiram untuk kendaraan ini"
+                                                : "Tidak ada layanan Parkiram saat ini"),
+                                        style: const TextStyle(
                                           fontSize: 16,
-                                          color: const Color.fromARGB(
-                                              255, 3, 5, 94),
+                                          color: Color.fromARGB(255, 3, 5, 94),
                                         ),
-                                        textAlign: TextAlign.center,
-                                      ),
+                                      )
                                     ],
                                   ),
                                 );

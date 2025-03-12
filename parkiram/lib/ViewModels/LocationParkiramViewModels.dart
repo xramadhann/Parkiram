@@ -1,3 +1,5 @@
+// ignore_for_file: file_names, unrelated_type_equality_checks
+
 import 'package:flutter/material.dart';
 import 'package:parkiram/Models/FilterParkiramModels.dart';
 
@@ -6,14 +8,14 @@ class ParkingModel {
   final String address;
   final String priceFirstHour;
   final String priceNextHour;
-  final VehicleType vehicleType;
+  final List<VehicleType> vehicleTypes;
 
   ParkingModel({
     required this.title,
     required this.address,
     required this.priceFirstHour,
     required this.priceNextHour,
-    required this.vehicleType,
+    required this.vehicleTypes,
   });
 }
 
@@ -24,7 +26,11 @@ class ParkingViewModel extends ChangeNotifier {
       address: "Jl. Raya Kalibata, Kec. Pancoran, Kota Jakarta Selatan, 12750",
       priceFirstHour: "Rp.5000",
       priceNextHour: "Rp.1000",
-      vehicleType: VehicleType.bus,
+      vehicleTypes: [
+        VehicleType.car,
+        VehicleType.electricCar,
+        VehicleType.truck
+      ],
     ),
     ParkingModel(
       title: "Basurra City",
@@ -32,39 +38,62 @@ class ParkingViewModel extends ChangeNotifier {
           "Jl. Jenderal Basuki Rachmat, Kec. Jatinegara, Kota Jakarta Timur, 13410",
       priceFirstHour: "Rp.3000",
       priceNextHour: "Rp.1000",
-      vehicleType: VehicleType.car,
+      vehicleTypes: [
+        VehicleType.car,
+        VehicleType.electricCar,
+        VehicleType.truck
+      ],
     ),
     ParkingModel(
       title: "Plaza Kalibata",
       address: "Jl. Raya Kalibata, Kec. Pancoran, Kota Jakarta Selatan, 12750",
       priceFirstHour: "Rp.3000",
       priceNextHour: "Rp.1000",
-      vehicleType: VehicleType.car,
+      vehicleTypes: [
+        VehicleType.car,
+        VehicleType.electricCar,
+        VehicleType.truck
+      ],
     ),
   ];
 
   List<ParkingModel> _filteredParkingList = [];
+  String _searchQuery = "";
+  VehicleType? _selectedFilter;
 
   List<ParkingModel> get parkingList => _filteredParkingList;
+  String get searchQuery => _searchQuery;
+  VehicleType? get selectedFilter => _selectedFilter;
 
   ParkingViewModel() {
-    applyFilter(null); // ✅ Tambahkan ini agar list langsung muncul
+    applyFilter(null);
   }
 
   void setParkingList(List<ParkingModel> list) {
     _parkingList = list;
-    applyFilter(null); // ✅ Pastikan list tetap muncul setelah diupdate
+    applyFilter(_selectedFilter);
   }
 
   void applyFilter(VehicleType? selectedFilter) {
-    if (selectedFilter == null) {
-      _filteredParkingList =
-          List.from(_parkingList); // ✅ Tampilkan semua parkiran
-    } else {
-      _filteredParkingList = _parkingList
-          .where((parking) => parking.vehicleType == selectedFilter)
-          .toList();
-    }
+    _selectedFilter = selectedFilter;
+    _filterResults();
+  }
+
+  void searchParking(String query) {
+    _searchQuery = query;
+    _filterResults();
+  }
+
+  void _filterResults() {
+    _filteredParkingList = _parkingList.where((parking) {
+      bool matchesFilter = (_selectedFilter == null ||
+          parking.vehicleTypes.contains(_selectedFilter));
+      bool matchesSearch = (_searchQuery.isEmpty ||
+          parking.title.toLowerCase().contains(_searchQuery.toLowerCase()));
+
+      return matchesFilter && matchesSearch;
+    }).toList();
+
     notifyListeners();
   }
 }

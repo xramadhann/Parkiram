@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:parkiram/Models/FilterParkiramModels.dart';
 
 class FilterViewModel extends ChangeNotifier {
-  VehicleType? _selectedFilter; // Menyimpan filter yang aktif
+  VehicleType? _selectedFilter;
 
   VehicleType? get selectedFilter => _selectedFilter;
 

@@ -1,3 +1,5 @@
+// ignore_for_file: file_names
+
 enum VehicleType { car, electricCar, scooter, bicycle, bus, truck }
 
 class FilterModel {

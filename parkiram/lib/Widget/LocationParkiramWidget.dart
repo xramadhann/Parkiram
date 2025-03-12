@@ -41,7 +41,7 @@ class ParkingCard extends StatelessWidget {
                         title,
                         style: GoogleFonts.righteous(
                           fontSize: 24,
-                          color: Colors.white,
+                          color: const Color.fromARGB(255, 246, 255, 0),
                         ),
                       ),
                       const SizedBox(height: 5),
@@ -57,7 +57,7 @@ class ParkingCard extends StatelessWidget {
                         "$priceFirstHour/Jam Pertama",
                         style: GoogleFonts.righteous(
                           fontSize: 14,
-                          color: Colors.yellow,
+                          color: const Color.fromARGB(255, 246, 255, 0),
                           fontWeight: FontWeight.bold,
                         ),
                       ),
