@@ -1,8 +1,8 @@
 // ignore_for_file: file_names
 
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:syncfusion_flutter_gauges/gauges.dart';
+import 'package:flutter/cupertino.dart';
 
 class ParkiramAvailable extends StatefulWidget {
   const ParkiramAvailable({super.key});
@@ -39,16 +39,15 @@ class _ParkiramAvailableState extends State<ParkiramAvailable> {
               axes: <RadialAxis>[
                 RadialAxis(
                   minimum: 0,
-                  maximum: 100, // Maksimal 100%
-                  startAngle: 90, // Mulai dari atas (0°)
-                  endAngle: 450, // Lingkaran penuh (360°)
-                  radiusFactor: 0.8, // Ukuran gauge
+                  maximum: 100,
+                  startAngle: 90,
+                  endAngle: 450,
+                  radiusFactor: 0.8,
                   showLabels: false,
                   showTicks: false,
                   axisLineStyle: const AxisLineStyle(
                     thickness: 20,
-                    color: Color.fromRGBO(
-                        228, 228, 228, 1), // Warna background gauge
+                    color: Color.fromRGBO(228, 228, 228, 1),
                     thicknessUnit: GaugeSizeUnit.logicalPixel,
                   ),
                   annotations: <GaugeAnnotation>[
@@ -95,6 +94,46 @@ class _ParkiramAvailableState extends State<ParkiramAvailable> {
                       fontSize: 24,
                       fontWeight: FontWeight.w500,
                       color: Color.fromARGB(255, 3, 5, 94),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Positioned(
+              bottom: 70,
+              child: Row(
+                children: [
+                  Container(
+                    width: 50,
+                    height: 50,
+                    decoration: BoxDecoration(
+                      color: Color.fromARGB(255, 3, 5, 94),
+                      borderRadius: BorderRadius.all(Radius.circular(10)),
+                    ),
+                    child: Center(
+                      child: Icon(
+                        CupertinoIcons.arrow_left,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ),
+                  SizedBox(width: 10),
+                  Container(
+                    width: 250,
+                    height: 50,
+                    decoration: BoxDecoration(
+                      color: Color.fromARGB(255, 3, 5, 94),
+                      borderRadius: BorderRadius.all(Radius.circular(10)),
+                    ),
+                    child: Center(
+                      child: Text(
+                        "LIHAT PARKIRAM",
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.w500,
+                          color: Color.fromARGB(255, 255, 255, 255),
+                        ),
+                      ),
                     ),
                   ),
                 ],
