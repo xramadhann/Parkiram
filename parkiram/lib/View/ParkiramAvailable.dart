@@ -1,15 +1,47 @@
-// ignore_for_file: file_names
+// ignore_for_file: library_private_types_in_public_api, file_names
 
 import 'package:flutter/material.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:parkiram/Models/LocationParkiramModels.dart';
 import 'package:parkiram/View/ParkiramSlot.dart';
 import 'package:syncfusion_flutter_gauges/gauges.dart';
 import 'package:flutter/cupertino.dart';
 
-class ParkiramAvailable extends StatelessWidget {
+class ParkiramAvailable extends StatefulWidget {
   final ParkingModel parking;
 
   const ParkiramAvailable({super.key, required this.parking});
+
+  @override
+  _ParkiramAvailableState createState() => _ParkiramAvailableState();
+}
+
+class _ParkiramAvailableState extends State<ParkiramAvailable> {
+  late DatabaseReference _databaseRef;
+  String _availableSlot = "0";
+
+  @override
+  void initState() {
+    super.initState();
+
+    String parkingPath = widget.parking.title.replaceAll(" ", "");
+    _databaseRef =
+        FirebaseDatabase.instance.ref("$parkingPath/parkingSlot/availableSlot");
+
+    _databaseRef.onValue.listen((DatabaseEvent event) {
+      if (event.snapshot.value != null) {
+        setState(() {
+          _availableSlot = event.snapshot.value.toString();
+        });
+
+        debugPrint("Data slot tersedia diperbarui: $_availableSlot");
+      } else {
+        debugPrint("Tidak ada data slot tersedia.");
+      }
+    }, onError: (error) {
+      debugPrint("Error mengambil data slot tersedia: $error");
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +61,7 @@ class ParkiramAvailable extends StatelessWidget {
                 child: Column(
                   children: [
                     Text(
-                      parking.title,
+                      widget.parking.title,
                       style: const TextStyle(
                         fontSize: 36,
                         fontWeight: FontWeight.w600,
@@ -39,7 +71,7 @@ class ParkiramAvailable extends StatelessWidget {
                     ),
                     const SizedBox(height: 10),
                     Text(
-                      parking.address,
+                      widget.parking.address,
                       style: const TextStyle(
                         fontSize: 14,
                         fontWeight: FontWeight.w400,
@@ -97,9 +129,8 @@ class ParkiramAvailable extends StatelessWidget {
                   ],
                   pointers: <GaugePointer>[
                     RangePointer(
-                      value:
-                          double.tryParse(parking.parkingSlot.availableSlot) ??
-                              0,
+                      value: double.tryParse(_availableSlot) ??
+                          0, // Slot tersedia diubah secara real-time
                       width: 20,
                       sizeUnit: GaugeSizeUnit.logicalPixel,
                       color: const Color.fromARGB(255, 246, 255, 0),
@@ -114,7 +145,7 @@ class ParkiramAvailable extends StatelessWidget {
               child: Column(
                 children: [
                   Text(
-                    "${parking.parkingSlot.availableSlot}/200",
+                    "$_availableSlot/200",
                     style: const TextStyle(
                       fontSize: 32,
                       fontWeight: FontWeight.w500,
@@ -159,7 +190,8 @@ class ParkiramAvailable extends StatelessWidget {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => ParkiramSlot(parking: parking),
+                          builder: (context) =>
+                              ParkiramSlot(parking: widget.parking),
                         ),
                       );
                     },
