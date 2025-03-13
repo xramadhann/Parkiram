@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:parkiram/Models/FilterParkiramModels.dart';
+import 'package:parkiram/View/ParkiramAvailable.dart';
 import 'package:parkiram/ViewModels/FilterParkiramViewModels.dart';
 import 'package:parkiram/Widget/LocationParkiramWidget.dart';
 import 'package:provider/provider.dart';
@@ -225,6 +226,16 @@ class _HomePageState extends State<HomePage> {
                                     address: parking.address,
                                     priceFirstHour: parking.priceFirstHour,
                                     priceNextHour: parking.priceNextHour,
+                                    onTap: () {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) =>
+                                              ParkiramAvailable(
+                                                  parking: parking),
+                                        ),
+                                      );
+                                    },
                                   );
                                 },
                               );

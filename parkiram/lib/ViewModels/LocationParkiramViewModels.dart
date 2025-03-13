@@ -6,8 +6,7 @@ import 'package:parkiram/Models/FilterParkiramModels.dart';
 import 'package:parkiram/Models/LocationParkiramModels.dart';
 
 class ParkingViewModel extends ChangeNotifier {
-  final DatabaseReference _dbRef =
-      FirebaseDatabase.instance.ref(); // Ambil dari root
+  final DatabaseReference _dbRef = FirebaseDatabase.instance.ref();
 
   List<ParkingModel> _parkingList = [];
   List<ParkingModel> _filteredParkingList = [];
@@ -28,7 +27,7 @@ class ParkingViewModel extends ChangeNotifier {
 
       if (data != null && data is Map<dynamic, dynamic>) {
         _parkingList = data.entries.map((entry) {
-          debugPrint("Loading parking data: ${entry.key}"); // Debug Log
+          debugPrint("Loading parking data: ${entry.key}");
           final parkingData = entry.value as Map<dynamic, dynamic>;
           return ParkingModel.fromMap(parkingData);
         }).toList();

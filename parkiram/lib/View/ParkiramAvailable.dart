@@ -1,17 +1,15 @@
 // ignore_for_file: file_names
 
 import 'package:flutter/material.dart';
+import 'package:parkiram/Models/LocationParkiramModels.dart';
 import 'package:syncfusion_flutter_gauges/gauges.dart';
 import 'package:flutter/cupertino.dart';
 
-class ParkiramAvailable extends StatefulWidget {
-  const ParkiramAvailable({super.key});
+class ParkiramAvailable extends StatelessWidget {
+  final ParkingModel parking;
 
-  @override
-  State<ParkiramAvailable> createState() => _ParkiramAvailableState();
-}
+  const ParkiramAvailable({super.key, required this.parking});
 
-class _ParkiramAvailableState extends State<ParkiramAvailable> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,22 +25,21 @@ class _ParkiramAvailableState extends State<ParkiramAvailable> {
                 margin: const EdgeInsets.symmetric(horizontal: 20),
                 padding:
                     const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                decoration: BoxDecoration(),
                 child: Column(
-                  children: const [
+                  children: [
                     Text(
-                      "Plaza Kalibata",
-                      style: TextStyle(
+                      parking.title,
+                      style: const TextStyle(
                         fontSize: 36,
                         fontWeight: FontWeight.w600,
                         color: Color.fromARGB(255, 246, 255, 0),
                       ),
                       textAlign: TextAlign.center,
                     ),
-                    SizedBox(height: 10),
+                    const SizedBox(height: 10),
                     Text(
-                      "Jl. Raya Kalibata, Kec. Pancoran, Kota Jakarta Selatan, 12750",
-                      style: TextStyle(
+                      parking.address,
+                      style: const TextStyle(
                         fontSize: 14,
                         fontWeight: FontWeight.w400,
                         color: Color.fromARGB(255, 246, 255, 0),
@@ -99,7 +96,7 @@ class _ParkiramAvailableState extends State<ParkiramAvailable> {
                   ],
                   pointers: <GaugePointer>[
                     RangePointer(
-                      value: 20, // Nilai pertama (20%)
+                      value: 30,
                       width: 20,
                       sizeUnit: GaugeSizeUnit.logicalPixel,
                       color: const Color.fromARGB(255, 246, 255, 0),
@@ -112,16 +109,16 @@ class _ParkiramAvailableState extends State<ParkiramAvailable> {
             Positioned(
               bottom: 180,
               child: Column(
-                children: const [
+                children: [
                   Text(
                     "10/200",
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 32,
                       fontWeight: FontWeight.w500,
                       color: Color.fromARGB(255, 3, 5, 94),
                     ),
                   ),
-                  Text(
+                  const Text(
                     "Tersedia",
                     style: TextStyle(
                       fontSize: 24,
@@ -136,29 +133,32 @@ class _ParkiramAvailableState extends State<ParkiramAvailable> {
               bottom: 70,
               child: Row(
                 children: [
-                  Container(
-                    width: 50,
-                    height: 50,
-                    decoration: BoxDecoration(
-                      color: Color.fromARGB(255, 3, 5, 94),
-                      borderRadius: BorderRadius.all(Radius.circular(10)),
-                    ),
-                    child: Center(
-                      child: Icon(
-                        CupertinoIcons.arrow_left,
-                        color: Colors.white,
+                  GestureDetector(
+                    onTap: () => Navigator.pop(context),
+                    child: Container(
+                      width: 50,
+                      height: 50,
+                      decoration: const BoxDecoration(
+                        color: Color.fromARGB(255, 3, 5, 94),
+                        borderRadius: BorderRadius.all(Radius.circular(10)),
+                      ),
+                      child: const Center(
+                        child: Icon(
+                          CupertinoIcons.arrow_left,
+                          color: Colors.white,
+                        ),
                       ),
                     ),
                   ),
-                  SizedBox(width: 10),
+                  const SizedBox(width: 10),
                   Container(
                     width: 250,
                     height: 50,
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                       color: Color.fromARGB(255, 3, 5, 94),
                       borderRadius: BorderRadius.all(Radius.circular(10)),
                     ),
-                    child: Center(
+                    child: const Center(
                       child: Text(
                         "LIHAT PARKIRAM",
                         style: TextStyle(
