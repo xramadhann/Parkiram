@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:parkiram/View/HomePage.dart';
 import 'package:parkiram/View/ParkiramAvailable.dart';
+import 'package:parkiram/View/ParkiramSlot.dart';
 import 'package:parkiram/ViewModels/FilterParkiramViewModels.dart';
 import 'package:provider/provider.dart';
 
@@ -31,7 +32,8 @@ class Parkiram extends StatelessWidget {
           textTheme: GoogleFonts.righteousTextTheme(),
         ),
         debugShowCheckedModeBanner: false,
-        home: const ParkiramAvailable(),
+        // home: const ParkiramAvailable(),
+        home: const ParkiramSlot(),
       ),
     );
   }
