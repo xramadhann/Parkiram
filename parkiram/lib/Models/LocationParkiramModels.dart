@@ -1,4 +1,7 @@
+// ignore_for_file: file_names
+
 import 'package:parkiram/Models/FilterParkiramModels.dart';
+import 'package:parkiram/Models/ParkiramSlotModels.dart';
 
 class ParkingModel {
   final String title;
@@ -6,6 +9,7 @@ class ParkingModel {
   final String priceFirstHour;
   final String priceNextHour;
   final List<VehicleType> vehicleTypes;
+  final ParkingSlot parkingSlot;
 
   ParkingModel({
     required this.title,
@@ -13,9 +17,9 @@ class ParkingModel {
     required this.priceFirstHour,
     required this.priceNextHour,
     required this.vehicleTypes,
+    required this.parkingSlot,
   });
 
-  // Factory method untuk membuat objek dari Firebase data snapshot
   factory ParkingModel.fromMap(Map<dynamic, dynamic> data) {
     return ParkingModel(
       title: data['title'] ?? '',
@@ -29,6 +33,9 @@ class ParkingModel {
                   ))
               .toList() ??
           [],
+      parkingSlot: data['parkingSlot'] != null
+          ? ParkingSlot.fromMap(data['parkingSlot'])
+          : ParkingSlot(availableSlot: '0', slots: {}),
     );
   }
 }
