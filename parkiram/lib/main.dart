@@ -1,14 +1,23 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:parkiram/View/HomePage.dart';
-import 'package:parkiram/View/ParkiramAvailable.dart';
-import 'package:parkiram/View/ParkiramSlot.dart';
 import 'package:parkiram/ViewModels/FilterParkiramViewModels.dart';
+import 'package:parkiram/ViewModels/LocationParkiramViewModels.dart';
+import 'package:parkiram/firebase_options.dart';
 import 'package:provider/provider.dart';
 
-import 'ViewModels/LocationParkiramViewModels.dart';
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
 
-void main() {
+  try {
+    await Firebase.initializeApp(
+      options: DefaultFirebaseOptions.currentPlatform,
+    );
+  } catch (e) {
+    debugPrint("Firebase initialization error: $e");
+  }
+
   runApp(const Parkiram());
 }
 
@@ -19,8 +28,8 @@ class Parkiram extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (context) => ParkingViewModel()),
-        ChangeNotifierProvider(create: (context) => FilterViewModel()),
+        ChangeNotifierProvider(create: (_) => ParkingViewModel()),
+        ChangeNotifierProvider(create: (_) => FilterViewModel()),
       ],
       child: MaterialApp(
         title: 'Parkiram App',
@@ -32,8 +41,7 @@ class Parkiram extends StatelessWidget {
           textTheme: GoogleFonts.righteousTextTheme(),
         ),
         debugShowCheckedModeBanner: false,
-        // home: const ParkiramAvailable(),
-        home: const ParkiramSlot(),
+        home: const HomePage(),
       ),
     );
   }
