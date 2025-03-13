@@ -32,7 +32,8 @@ class Parkiram extends StatelessWidget {
           textTheme: GoogleFonts.righteousTextTheme(),
         ),
         debugShowCheckedModeBanner: false,
-        home: const ParkiramAvailable(),
+        // home: const ParkiramAvailable(),
+        home: const ParkiramSlot(),
       ),
     );
   }

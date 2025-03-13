@@ -77,27 +77,83 @@ class _ParkiramSlotState extends State<ParkiramSlot> {
               ),
             ),
             Positioned(
-              top: 375,
-              left: 25,
+              top: 310,
+              left: 30,
               child: Image.asset(
-                'assets/images/carLot.png',
-                width: 120,
+                'assets/images/carLotLeft.png',
+                width: 100,
               ),
             ),
             Positioned(
-              top: 523,
-              left: 25,
+              top: 385,
+              left: 30,
               child: Image.asset(
-                'assets/images/carLot.png',
-                width: 120,
+                'assets/images/carLotLeft.png',
+                width: 100,
               ),
             ),
             Positioned(
-              top: 375,
-              left: 25,
+              top: 460,
+              left: 30,
               child: Image.asset(
-                'assets/images/carLot.png',
-                width: 120,
+                'assets/images/carLotLeft.png',
+                width: 100,
+              ),
+            ),
+            Positioned(
+              top: 533,
+              left: 30,
+              child: Image.asset(
+                'assets/images/carLotLeft.png',
+                width: 100,
+              ),
+            ),
+            Positioned(
+              top: 603,
+              left: 30,
+              child: Image.asset(
+                'assets/images/carLotLeft.png',
+                width: 100,
+              ),
+            ),
+            Positioned(
+              top: 310,
+              right: 30,
+              child: Image.asset(
+                'assets/images/carLotRight.png',
+                width: 100,
+              ),
+            ),
+            Positioned(
+              top: 385,
+              right: 30,
+              child: Image.asset(
+                'assets/images/carLotRight.png',
+                width: 100,
+              ),
+            ),
+            Positioned(
+              top: 460,
+              right: 30,
+              child: Image.asset(
+                'assets/images/carLotRight.png',
+                width: 100,
+              ),
+            ),
+            Positioned(
+              top: 533,
+              right: 30,
+              child: Image.asset(
+                'assets/images/carLotRight.png',
+                width: 100,
+              ),
+            ),
+            Positioned(
+              top: 603,
+              right: 30,
+              child: Image.asset(
+                'assets/images/carLotRight.png',
+                width: 100,
               ),
             ),
             Positioned(
