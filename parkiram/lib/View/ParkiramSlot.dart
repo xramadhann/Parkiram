@@ -77,6 +77,30 @@ class _ParkiramSlotState extends State<ParkiramSlot> {
               ),
             ),
             Positioned(
+              top: 375,
+              left: 25,
+              child: Image.asset(
+                'assets/images/carLot.png',
+                width: 120,
+              ),
+            ),
+            Positioned(
+              top: 523,
+              left: 25,
+              child: Image.asset(
+                'assets/images/carLot.png',
+                width: 120,
+              ),
+            ),
+            Positioned(
+              top: 375,
+              left: 25,
+              child: Image.asset(
+                'assets/images/carLot.png',
+                width: 120,
+              ),
+            ),
+            Positioned(
               bottom: 50,
               child: Row(
                 children: [
