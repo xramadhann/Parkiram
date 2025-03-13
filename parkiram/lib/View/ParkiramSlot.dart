@@ -1,16 +1,48 @@
-// ignore_for_file: file_names, unnecessary_import
+// ignore_for_file: library_private_types_in_public_api
 
 import 'package:flutter/material.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:firebase_database/firebase_database.dart';
+import 'package:parkiram/Models/LocationParkiramModels.dart';
 
 class ParkiramSlot extends StatefulWidget {
-  const ParkiramSlot({super.key});
+  final ParkingModel parking;
+
+  const ParkiramSlot({super.key, required this.parking});
 
   @override
-  State<ParkiramSlot> createState() => _ParkiramSlotState();
+  _ParkiramSlotState createState() => _ParkiramSlotState();
 }
 
 class _ParkiramSlotState extends State<ParkiramSlot> {
+  late DatabaseReference _databaseRef;
+  Map<String, String> _slots = {};
+
+  @override
+  void initState() {
+    super.initState();
+
+    String parkingPath = widget.parking.title.replaceAll(" ", "");
+    _databaseRef = FirebaseDatabase.instance.ref("$parkingPath/parkingSlot");
+
+    _databaseRef.onValue.listen((DatabaseEvent event) {
+      if (event.snapshot.value != null && event.snapshot.value is Map) {
+        Map<dynamic, dynamic> data =
+            event.snapshot.value as Map<dynamic, dynamic>;
+
+        setState(() {
+          _slots = data
+              .map((key, value) => MapEntry(key.toString(), value.toString()));
+        });
+
+        debugPrint("Data slot parkir diperbarui untuk $parkingPath: $_slots");
+      } else {
+        debugPrint("Tidak ada data parkir tersedia untuk $parkingPath.");
+      }
+    }, onError: (error) {
+      debugPrint("Error mengambil data parkir: $error");
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,22 +58,21 @@ class _ParkiramSlotState extends State<ParkiramSlot> {
                 margin: const EdgeInsets.symmetric(horizontal: 20),
                 padding:
                     const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                decoration: BoxDecoration(),
                 child: Column(
-                  children: const [
+                  children: [
                     Text(
-                      "Plaza Kalibata",
-                      style: TextStyle(
+                      widget.parking.title,
+                      style: const TextStyle(
                         fontSize: 36,
                         fontWeight: FontWeight.w600,
                         color: Color.fromARGB(255, 246, 255, 0),
                       ),
                       textAlign: TextAlign.center,
                     ),
-                    SizedBox(height: 10),
+                    const SizedBox(height: 10),
                     Text(
-                      "Jl. Raya Kalibata, Kec. Pancoran, Kota Jakarta Selatan, 12750",
-                      style: TextStyle(
+                      widget.parking.address,
+                      style: const TextStyle(
                         fontSize: 14,
                         fontWeight: FontWeight.w400,
                         color: Color.fromARGB(255, 246, 255, 0),
@@ -76,109 +107,55 @@ class _ParkiramSlotState extends State<ParkiramSlot> {
                 ),
               ),
             ),
-            Positioned(
-              top: 310,
-              left: 30,
-              child: Image.asset(
-                'assets/images/carLotLeft.png',
-                width: 100,
+            if (_slots.containsKey("slotA1") && _slots["slotA1"] == "1")
+              Positioned(
+                top: 310,
+                left: 30,
+                child: Image.asset(
+                  'assets/images/carLotLeft.png',
+                  width: 100,
+                ),
               ),
-            ),
-            Positioned(
-              top: 385,
-              left: 30,
-              child: Image.asset(
-                'assets/images/carLotLeft.png',
-                width: 100,
+            if (_slots.containsKey("slotA2") && _slots["slotA2"] == "1")
+              Positioned(
+                top: 385,
+                left: 30,
+                child: Image.asset(
+                  'assets/images/carLotLeft.png',
+                  width: 100,
+                ),
               ),
-            ),
-            Positioned(
-              top: 460,
-              left: 30,
-              child: Image.asset(
-                'assets/images/carLotLeft.png',
-                width: 100,
+            if (_slots.containsKey("slotA3") && _slots["slotA3"] == "1")
+              Positioned(
+                top: 460,
+                left: 30,
+                child: Image.asset(
+                  'assets/images/carLotLeft.png',
+                  width: 100,
+                ),
               ),
-            ),
-            Positioned(
-              top: 533,
-              left: 30,
-              child: Image.asset(
-                'assets/images/carLotLeft.png',
-                width: 100,
-              ),
-            ),
-            Positioned(
-              top: 603,
-              left: 30,
-              child: Image.asset(
-                'assets/images/carLotLeft.png',
-                width: 100,
-              ),
-            ),
-            Positioned(
-              top: 310,
-              right: 30,
-              child: Image.asset(
-                'assets/images/carLotRight.png',
-                width: 100,
-              ),
-            ),
-            Positioned(
-              top: 385,
-              right: 30,
-              child: Image.asset(
-                'assets/images/carLotRight.png',
-                width: 100,
-              ),
-            ),
-            Positioned(
-              top: 460,
-              right: 30,
-              child: Image.asset(
-                'assets/images/carLotRight.png',
-                width: 100,
-              ),
-            ),
-            Positioned(
-              top: 533,
-              right: 30,
-              child: Image.asset(
-                'assets/images/carLotRight.png',
-                width: 100,
-              ),
-            ),
-            Positioned(
-              top: 603,
-              right: 30,
-              child: Image.asset(
-                'assets/images/carLotRight.png',
-                width: 100,
-              ),
-            ),
             Positioned(
               bottom: 50,
-              child: Row(
-                children: [
-                  Container(
-                    width: 300,
-                    height: 50,
-                    decoration: BoxDecoration(
-                      color: Color.fromARGB(255, 3, 5, 94),
-                      borderRadius: BorderRadius.all(Radius.circular(10)),
-                    ),
-                    child: Center(
-                      child: Text(
-                        "KEMABALI",
-                        style: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.w500,
-                          color: Color.fromARGB(255, 255, 255, 255),
-                        ),
+              child: GestureDetector(
+                onTap: () => Navigator.pop(context),
+                child: Container(
+                  width: 300,
+                  height: 50,
+                  decoration: const BoxDecoration(
+                    color: Color.fromARGB(255, 3, 5, 94),
+                    borderRadius: BorderRadius.all(Radius.circular(10)),
+                  ),
+                  child: const Center(
+                    child: Text(
+                      "KEMBALI",
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.w500,
+                        color: Color.fromARGB(255, 255, 255, 255),
                       ),
                     ),
                   ),
-                ],
+                ),
               ),
             ),
           ],

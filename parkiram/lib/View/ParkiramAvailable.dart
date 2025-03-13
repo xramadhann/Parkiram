@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:parkiram/Models/LocationParkiramModels.dart';
+import 'package:parkiram/View/ParkiramSlot.dart';
 import 'package:syncfusion_flutter_gauges/gauges.dart';
 import 'package:flutter/cupertino.dart';
 
@@ -153,20 +154,30 @@ class ParkiramAvailable extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(width: 10),
-                  Container(
-                    width: 250,
-                    height: 50,
-                    decoration: const BoxDecoration(
-                      color: Color.fromARGB(255, 3, 5, 94),
-                      borderRadius: BorderRadius.all(Radius.circular(10)),
-                    ),
-                    child: const Center(
-                      child: Text(
-                        "LIHAT PARKIRAM",
-                        style: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.w500,
-                          color: Color.fromARGB(255, 255, 255, 255),
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => ParkiramSlot(parking: parking),
+                        ),
+                      );
+                    },
+                    child: Container(
+                      width: 250,
+                      height: 50,
+                      decoration: const BoxDecoration(
+                        color: Color.fromARGB(255, 3, 5, 94),
+                        borderRadius: BorderRadius.all(Radius.circular(10)),
+                      ),
+                      child: const Center(
+                        child: Text(
+                          "LIHAT PARKIRAM",
+                          style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.w500,
+                            color: Color.fromARGB(255, 255, 255, 255),
+                          ),
                         ),
                       ),
                     ),
