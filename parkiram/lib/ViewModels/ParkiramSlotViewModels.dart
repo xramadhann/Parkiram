@@ -15,7 +15,6 @@ class ParkiramSlotViewModel extends ChangeNotifier {
     String parkingPath = parkingTitle.replaceAll(" ", "");
     _databaseRef = FirebaseDatabase.instance.ref("$parkingPath/parkingSlot");
 
-    // Dengarkan perubahan data secara real-time
     _databaseRef.onValue.listen((DatabaseEvent event) {
       if (event.snapshot.value != null && event.snapshot.value is Map) {
         Map<dynamic, dynamic> data =
