@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_database/firebase_database.dart';
 
 class ParkiramAvailableViewModel extends ChangeNotifier {
-  String availableSlot = "0"; // Data slot tersedia
+  String availableSlot = "0";
   late DatabaseReference _databaseRef;
 
   ParkiramAvailableViewModel(String parkingTitle) {
@@ -19,7 +19,7 @@ class ParkiramAvailableViewModel extends ChangeNotifier {
     _databaseRef.onValue.listen((DatabaseEvent event) {
       if (event.snapshot.value != null) {
         availableSlot = event.snapshot.value.toString();
-        notifyListeners(); // Notifikasi perubahan ke UI
+        notifyListeners();
       }
     }, onError: (error) {
       debugPrint("Error mengambil data slot: $error");
