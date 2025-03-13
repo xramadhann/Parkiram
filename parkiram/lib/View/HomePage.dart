@@ -226,6 +226,8 @@ class _HomePageState extends State<HomePage> {
                                     address: parking.address,
                                     priceFirstHour: parking.priceFirstHour,
                                     priceNextHour: parking.priceNextHour,
+                                    availableSlot:
+                                        parking.parkingSlot.availableSlot,
                                     onTap: () {
                                       Navigator.push(
                                         context,

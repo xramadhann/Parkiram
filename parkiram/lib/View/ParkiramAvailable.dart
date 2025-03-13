@@ -69,7 +69,7 @@ class ParkiramAvailable extends StatelessWidget {
               axes: <RadialAxis>[
                 RadialAxis(
                   minimum: 0,
-                  maximum: 100,
+                  maximum: 200,
                   startAngle: 90,
                   endAngle: 450,
                   radiusFactor: 0.8,
@@ -96,7 +96,9 @@ class ParkiramAvailable extends StatelessWidget {
                   ],
                   pointers: <GaugePointer>[
                     RangePointer(
-                      value: 30,
+                      value:
+                          double.tryParse(parking.parkingSlot.availableSlot) ??
+                              0,
                       width: 20,
                       sizeUnit: GaugeSizeUnit.logicalPixel,
                       color: const Color.fromARGB(255, 246, 255, 0),
@@ -111,7 +113,7 @@ class ParkiramAvailable extends StatelessWidget {
               child: Column(
                 children: [
                   Text(
-                    "10/200",
+                    "${parking.parkingSlot.availableSlot}/200",
                     style: const TextStyle(
                       fontSize: 32,
                       fontWeight: FontWeight.w500,

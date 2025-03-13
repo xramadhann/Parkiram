@@ -1,5 +1,3 @@
-// ignore_for_file: file_names
-
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -8,6 +6,7 @@ class ParkingCard extends StatelessWidget {
   final String address;
   final String priceFirstHour;
   final String priceNextHour;
+  final String availableSlot; // Tambahkan jumlah slot tersedia
   final VoidCallback onTap;
 
   const ParkingCard({
@@ -16,6 +15,7 @@ class ParkingCard extends StatelessWidget {
     required this.address,
     required this.priceFirstHour,
     required this.priceNextHour,
+    required this.availableSlot, // Tambahkan parameter ini
     required this.onTap,
   });
 
@@ -71,6 +71,15 @@ class ParkingCard extends StatelessWidget {
                           style: GoogleFonts.righteous(
                             fontSize: 12,
                             color: Colors.white,
+                          ),
+                        ),
+                        const SizedBox(height: 8),
+                        Text(
+                          "Slot Tersedia: $availableSlot", // Menampilkan slot tersedia
+                          style: GoogleFonts.righteous(
+                            fontSize: 12,
+                            color: const Color.fromARGB(255, 246, 255, 0),
+                            fontWeight: FontWeight.bold,
                           ),
                         ),
                       ],
