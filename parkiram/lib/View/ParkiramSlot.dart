@@ -84,14 +84,64 @@ class ParkiramSlot extends StatelessWidget {
                           viewModel.slots["slotA1"] == "1")
                         Positioned(
                           top: 310,
+                          right: 30,
+                          child: Image.asset(
+                            'assets/images/carLotRight.png',
+                            width: 100,
+                          ),
+                        ),
+                      if (viewModel.slots.containsKey("slotA2") &&
+                          viewModel.slots["slotA2"] == "1")
+                        Positioned(
+                          top: 385,
+                          right: 30,
+                          child: Image.asset(
+                            'assets/images/carLotRight.png',
+                            width: 100,
+                          ),
+                        ),
+                      if (viewModel.slots.containsKey("slotA3") &&
+                          viewModel.slots["slotA3"] == "1")
+                        Positioned(
+                          top: 460,
+                          right: 30,
+                          child: Image.asset(
+                            'assets/images/carLotRight.png',
+                            width: 100,
+                          ),
+                        ),
+                      if (viewModel.slots.containsKey("slotA4") &&
+                          viewModel.slots["slotA4"] == "1")
+                        Positioned(
+                          top: 533,
+                          right: 30,
+                          child: Image.asset(
+                            'assets/images/carLotRight.png',
+                            width: 100,
+                          ),
+                        ),
+                      if (viewModel.slots.containsKey("slotA5") &&
+                          viewModel.slots["slotA5"] == "1")
+                        Positioned(
+                          top: 603,
+                          right: 30,
+                          child: Image.asset(
+                            'assets/images/carLotRight.png',
+                            width: 100,
+                          ),
+                        ),
+                      if (viewModel.slots.containsKey("slotA6") &&
+                          viewModel.slots["slotA6"] == "1")
+                        Positioned(
+                          top: 310,
                           left: 30,
                           child: Image.asset(
                             'assets/images/carLotLeft.png',
                             width: 100,
                           ),
                         ),
-                      if (viewModel.slots.containsKey("slotA2") &&
-                          viewModel.slots["slotA2"] == "1")
+                      if (viewModel.slots.containsKey("slotA7") &&
+                          viewModel.slots["slotA7"] == "1")
                         Positioned(
                           top: 385,
                           left: 30,
@@ -100,8 +150,8 @@ class ParkiramSlot extends StatelessWidget {
                             width: 100,
                           ),
                         ),
-                      if (viewModel.slots.containsKey("slotA3") &&
-                          viewModel.slots["slotA3"] == "1")
+                      if (viewModel.slots.containsKey("slotA8") &&
+                          viewModel.slots["slotA8"] == "1")
                         Positioned(
                           top: 460,
                           left: 30,
@@ -110,8 +160,8 @@ class ParkiramSlot extends StatelessWidget {
                             width: 100,
                           ),
                         ),
-                      if (viewModel.slots.containsKey("slotA4") &&
-                          viewModel.slots["slotA4"] == "1")
+                      if (viewModel.slots.containsKey("slotA9") &&
+                          viewModel.slots["slotA9"] == "1")
                         Positioned(
                           top: 533,
                           left: 30,
@@ -120,8 +170,8 @@ class ParkiramSlot extends StatelessWidget {
                             width: 100,
                           ),
                         ),
-                      if (viewModel.slots.containsKey("slotA5") &&
-                          viewModel.slots["slotA5"] == "1")
+                      if (viewModel.slots.containsKey("slotA10") &&
+                          viewModel.slots["slotA10"] == "1")
                         Positioned(
                           top: 603,
                           left: 30,
