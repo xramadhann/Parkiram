@@ -75,6 +75,18 @@ class ParkiramAvailable extends StatelessWidget {
               // Gauge Chart
               Consumer<ParkiramAvailableViewModel>(
                 builder: (context, viewModel, child) {
+                  int used = viewModel.totalSlot -
+                      (int.tryParse(viewModel.availableSlot) ?? 0);
+                  Color color = used >= 200
+                      ? Colors.red
+                      : used >= 150
+                          ? Colors.orange
+                          : used >= 100
+                              ? Colors.yellow
+                              : used >= 50
+                                  ? Colors.lightGreen
+                                  : Colors.green;
+
                   return SfRadialGauge(
                     axes: <RadialAxis>[
                       RadialAxis(
@@ -106,11 +118,10 @@ class ParkiramAvailable extends StatelessWidget {
                         ],
                         pointers: <GaugePointer>[
                           RangePointer(
-                            value:
-                                double.tryParse(viewModel.availableSlot) ?? 0,
+                            value: used.toDouble(),
                             width: 20,
                             sizeUnit: GaugeSizeUnit.logicalPixel,
-                            color: const Color.fromARGB(255, 246, 255, 0),
+                            color: color,
                             cornerStyle: CornerStyle.bothCurve,
                           ),
                         ],
@@ -127,7 +138,7 @@ class ParkiramAvailable extends StatelessWidget {
                     return Column(
                       children: [
                         Text(
-                          "${viewModel.availableSlot}/200",
+                          viewModel.formattedSlot,
                           style: const TextStyle(
                             fontSize: 32,
                             fontWeight: FontWeight.w500,

@@ -5,6 +5,7 @@ import 'package:firebase_database/firebase_database.dart';
 
 class ParkiramAvailableViewModel extends ChangeNotifier {
   String availableSlot = "0";
+  final int totalSlot = 200;
   late DatabaseReference _databaseRef;
 
   ParkiramAvailableViewModel(String parkingTitle) {
@@ -24,5 +25,11 @@ class ParkiramAvailableViewModel extends ChangeNotifier {
     }, onError: (error) {
       debugPrint("Error mengambil data slot: $error");
     });
+  }
+
+  String get formattedSlot {
+    int parsedAvailable = int.tryParse(availableSlot) ?? 0;
+    int used = totalSlot - parsedAvailable;
+    return "$used/$totalSlot";
   }
 }
