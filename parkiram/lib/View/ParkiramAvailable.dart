@@ -24,7 +24,7 @@ class ParkiramAvailable extends StatelessWidget {
             alignment: Alignment.center,
             children: [
               Positioned(
-                top: 45,
+                top: MediaQuery.of(context).size.height * 0.05,
                 child: Container(
                   width: MediaQuery.of(context).size.width * 0.9,
                   margin: const EdgeInsets.symmetric(horizontal: 20),
@@ -34,10 +34,10 @@ class ParkiramAvailable extends StatelessWidget {
                     children: [
                       Text(
                         parking.title,
-                        style: const TextStyle(
-                          fontSize: 36,
+                        style: TextStyle(
+                          fontSize: MediaQuery.of(context).size.width * 0.09,
                           fontWeight: FontWeight.w600,
-                          color: Color.fromARGB(255, 246, 255, 0),
+                          color: const Color.fromARGB(255, 246, 255, 0),
                         ),
                         textAlign: TextAlign.center,
                       ),
@@ -55,13 +55,12 @@ class ParkiramAvailable extends StatelessWidget {
                   ),
                 ),
               ),
-
               Positioned(
                 bottom: 0,
                 left: 0,
                 right: 0,
                 child: Container(
-                  height: 700,
+                  height: MediaQuery.of(context).size.height * 0.75,
                   decoration: const BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.only(
@@ -71,7 +70,6 @@ class ParkiramAvailable extends StatelessWidget {
                   ),
                 ),
               ),
-
               // Gauge Chart
               Consumer<ParkiramAvailableViewModel>(
                 builder: (context, viewModel, child) {
@@ -130,19 +128,18 @@ class ParkiramAvailable extends StatelessWidget {
                   );
                 },
               ),
-
               Positioned(
-                bottom: 180,
+                bottom: MediaQuery.of(context).size.height * 0.2,
                 child: Consumer<ParkiramAvailableViewModel>(
                   builder: (context, viewModel, child) {
                     return Column(
                       children: [
                         Text(
                           viewModel.formattedSlot,
-                          style: const TextStyle(
-                            fontSize: 32,
+                          style: TextStyle(
+                            fontSize: MediaQuery.of(context).size.width * 0.08,
                             fontWeight: FontWeight.w500,
-                            color: Color.fromARGB(255, 3, 5, 94),
+                            color: const Color.fromARGB(255, 3, 5, 94),
                           ),
                         ),
                         const Text(
@@ -158,7 +155,6 @@ class ParkiramAvailable extends StatelessWidget {
                   },
                 ),
               ),
-
               Positioned(
                 bottom: 70,
                 child: Row(
@@ -192,7 +188,7 @@ class ParkiramAvailable extends StatelessWidget {
                         );
                       },
                       child: Container(
-                        width: 250,
+                        width: MediaQuery.of(context).size.width * 0.7,
                         height: 50,
                         decoration: const BoxDecoration(
                           color: Color.fromARGB(255, 3, 5, 94),

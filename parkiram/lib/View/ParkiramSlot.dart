@@ -21,7 +21,7 @@ class ParkiramSlot extends StatelessWidget {
             alignment: Alignment.center,
             children: [
               Positioned(
-                top: 45,
+                top: MediaQuery.of(context).size.height * 0.05, // 5% from top
                 child: Container(
                   width: MediaQuery.of(context).size.width * 0.9,
                   margin: const EdgeInsets.symmetric(horizontal: 20),
@@ -57,7 +57,8 @@ class ParkiramSlot extends StatelessWidget {
                 left: 0,
                 right: 0,
                 child: Container(
-                  height: 700,
+                  height:
+                      MediaQuery.of(context).size.height * 0.75, // 70% height
                   decoration: const BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.only(
@@ -68,11 +69,11 @@ class ParkiramSlot extends StatelessWidget {
                 ),
               ),
               Positioned(
-                top: 200,
+                top: MediaQuery.of(context).size.height * 0.25, // 20% from top
                 child: Center(
                   child: Image.asset(
                     'assets/images/ParkingLot.png',
-                    width: MediaQuery.of(context).size.width * 0.9,
+                    width: MediaQuery.of(context).size.width * 0.9, // 90% width
                   ),
                 ),
               ),
@@ -83,8 +84,10 @@ class ParkiramSlot extends StatelessWidget {
                       if (viewModel.slots.containsKey("slotA1") &&
                           viewModel.slots["slotA1"] == "1")
                         Positioned(
-                          top: 310,
-                          right: 30,
+                          top: MediaQuery.of(context).size.height *
+                              0.375, // adjusted based on screen height
+                          right: MediaQuery.of(context).size.width *
+                              0.1, // adjusted based on screen width
                           child: Image.asset(
                             'assets/images/carLotRight.png',
                             width: 100,
@@ -93,8 +96,10 @@ class ParkiramSlot extends StatelessWidget {
                       if (viewModel.slots.containsKey("slotA2") &&
                           viewModel.slots["slotA2"] == "1")
                         Positioned(
-                          top: 385,
-                          right: 30,
+                          top: MediaQuery.of(context).size.height *
+                              0.455, // adjusted based on screen height
+                          right: MediaQuery.of(context).size.width *
+                              0.1, // adjusted based on screen width
                           child: Image.asset(
                             'assets/images/carLotRight.png',
                             width: 100,
@@ -103,8 +108,10 @@ class ParkiramSlot extends StatelessWidget {
                       if (viewModel.slots.containsKey("slotA3") &&
                           viewModel.slots["slotA3"] == "1")
                         Positioned(
-                          top: 460,
-                          right: 30,
+                          top: MediaQuery.of(context).size.height *
+                              0.540, // adjusted based on screen height
+                          right: MediaQuery.of(context).size.width *
+                              0.1, // adjusted based on screen width
                           child: Image.asset(
                             'assets/images/carLotRight.png',
                             width: 100,
@@ -113,8 +120,10 @@ class ParkiramSlot extends StatelessWidget {
                       if (viewModel.slots.containsKey("slotA4") &&
                           viewModel.slots["slotA4"] == "1")
                         Positioned(
-                          top: 533,
-                          right: 30,
+                          top: MediaQuery.of(context).size.height *
+                              0.625, // adjusted based on screen height
+                          right: MediaQuery.of(context).size.width *
+                              0.1, // adjusted based on screen width
                           child: Image.asset(
                             'assets/images/carLotRight.png',
                             width: 100,
@@ -123,8 +132,10 @@ class ParkiramSlot extends StatelessWidget {
                       if (viewModel.slots.containsKey("slotA5") &&
                           viewModel.slots["slotA5"] == "1")
                         Positioned(
-                          top: 603,
-                          right: 30,
+                          top: MediaQuery.of(context).size.height *
+                              0.705, // adjusted based on screen height
+                          right: MediaQuery.of(context).size.width *
+                              0.1, // adjusted based on screen width
                           child: Image.asset(
                             'assets/images/carLotRight.png',
                             width: 100,
@@ -133,8 +144,10 @@ class ParkiramSlot extends StatelessWidget {
                       if (viewModel.slots.containsKey("slotA6") &&
                           viewModel.slots["slotA6"] == "1")
                         Positioned(
-                          top: 310,
-                          left: 30,
+                          top: MediaQuery.of(context).size.height *
+                              0.375, // adjusted based on screen height
+                          left: MediaQuery.of(context).size.width *
+                              0.1, // adjusted based on screen width
                           child: Image.asset(
                             'assets/images/carLotLeft.png',
                             width: 100,
@@ -143,8 +156,10 @@ class ParkiramSlot extends StatelessWidget {
                       if (viewModel.slots.containsKey("slotA7") &&
                           viewModel.slots["slotA7"] == "1")
                         Positioned(
-                          top: 385,
-                          left: 30,
+                          top: MediaQuery.of(context).size.height *
+                              0.455, // adjusted based on screen height
+                          left: MediaQuery.of(context).size.width *
+                              0.1, // adjusted based on screen width
                           child: Image.asset(
                             'assets/images/carLotLeft.png',
                             width: 100,
@@ -153,8 +168,10 @@ class ParkiramSlot extends StatelessWidget {
                       if (viewModel.slots.containsKey("slotA8") &&
                           viewModel.slots["slotA8"] == "1")
                         Positioned(
-                          top: 460,
-                          left: 30,
+                          top: MediaQuery.of(context).size.height *
+                              0.540, // adjusted based on screen height
+                          left: MediaQuery.of(context).size.width *
+                              0.1, // adjusted based on screen width
                           child: Image.asset(
                             'assets/images/carLotLeft.png',
                             width: 100,
@@ -163,8 +180,10 @@ class ParkiramSlot extends StatelessWidget {
                       if (viewModel.slots.containsKey("slotA9") &&
                           viewModel.slots["slotA9"] == "1")
                         Positioned(
-                          top: 533,
-                          left: 30,
+                          top: MediaQuery.of(context).size.height *
+                              0.625, // adjusted based on screen height
+                          left: MediaQuery.of(context).size.width *
+                              0.1, // adjusted based on screen width
                           child: Image.asset(
                             'assets/images/carLotLeft.png',
                             width: 100,
@@ -173,8 +192,10 @@ class ParkiramSlot extends StatelessWidget {
                       if (viewModel.slots.containsKey("slotA10") &&
                           viewModel.slots["slotA10"] == "1")
                         Positioned(
-                          top: 603,
-                          left: 30,
+                          top: MediaQuery.of(context).size.height *
+                              0.705, // adjusted based on screen height
+                          left: MediaQuery.of(context).size.width *
+                              0.1, // adjusted based on screen width
                           child: Image.asset(
                             'assets/images/carLotLeft.png',
                             width: 100,
@@ -189,7 +210,7 @@ class ParkiramSlot extends StatelessWidget {
                 child: GestureDetector(
                   onTap: () => Navigator.pop(context),
                   child: Container(
-                    width: 300,
+                    width: MediaQuery.of(context).size.width * 0.8, // 80% width
                     height: 50,
                     decoration: const BoxDecoration(
                       color: Color.fromARGB(255, 3, 5, 94),
