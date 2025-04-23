@@ -20,6 +20,10 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     Provider.of<ParkingViewModel>(context, listen: false);
+    // Get screen height and width
+    final screenHeight = MediaQuery.of(context).size.height;
+    final screenWidth = MediaQuery.of(context).size.width;
+
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: const Color.fromARGB(255, 3, 5, 94),
@@ -30,9 +34,10 @@ class _HomePageState extends State<HomePage> {
             height: constraints.maxHeight,
             child: Stack(
               children: [
+                // Use MediaQuery for dynamic positioning
                 Positioned(
-                  top: 60,
-                  left: 20,
+                  top: screenHeight * 0.08, // 8% of screen height
+                  left: screenWidth * 0.05, // 5% of screen width
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: const [
@@ -56,8 +61,8 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ),
                 Positioned(
-                  top: 48,
-                  right: 20,
+                  top: screenHeight * 0.06, // 6% of screen height
+                  right: screenWidth * 0.05, // 5% of screen width
                   child: Image.asset(
                     "assets/images/Logo/LogoPutihBiru.png",
                     width: 80,
@@ -66,11 +71,11 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ),
                 Positioned(
-                  top: 170,
-                  left: 20,
-                  right: 20,
+                  top: screenHeight * 0.2, // 20% of screen height
+                  left: screenWidth * 0.05, // 5% of screen width
+                  right: screenWidth * 0.05, // 5% of screen width
                   child: SizedBox(
-                    height: 120,
+                    height: screenHeight * 0.15, // 15% of screen height
                     child: Consumer<FilterViewModel>(
                       builder: (context, filterViewModel, child) {
                         return GridView.count(
@@ -114,9 +119,9 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ),
                 Positioned(
-                  top: 270,
-                  left: 20,
-                  right: 20,
+                  top: screenHeight * 0.32, // 30% of screen height
+                  left: screenWidth * 0.05, // 5% of screen width
+                  right: screenWidth * 0.05, // 5% of screen width
                   child: SizedBox(
                     height: 45,
                     child: Consumer<ParkingViewModel>(
@@ -164,7 +169,7 @@ class _HomePageState extends State<HomePage> {
                   left: 0,
                   right: 0,
                   child: Container(
-                    height: 550,
+                    height: screenHeight * 0.60, // 55% of screen height
                     decoration: const BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.only(
