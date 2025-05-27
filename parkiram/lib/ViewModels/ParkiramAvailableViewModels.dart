@@ -5,8 +5,11 @@ import 'package:firebase_database/firebase_database.dart';
 
 class ParkiramAvailableViewModel extends ChangeNotifier {
   String availableSlot = "0";
+  String recommendedSlot = "-";
   final int totalSlot = 200;
-  late DatabaseReference _databaseRef;
+
+  late DatabaseReference _availableSlotRef;
+  late DatabaseReference _recommendedSlotRef;
 
   ParkiramAvailableViewModel(String parkingTitle) {
     _fetchData(parkingTitle);
@@ -14,16 +17,33 @@ class ParkiramAvailableViewModel extends ChangeNotifier {
 
   void _fetchData(String parkingTitle) {
     String parkingPath = parkingTitle.replaceAll(" ", "");
-    _databaseRef =
+
+    // Reference untuk availableSlot
+    _availableSlotRef =
         FirebaseDatabase.instance.ref("$parkingPath/parkingSlot/availableSlot");
 
-    _databaseRef.onValue.listen((DatabaseEvent event) {
+    // Reference untuk recommendedSlot
+    _recommendedSlotRef = FirebaseDatabase.instance
+        .ref("$parkingPath/parkingSlot/recommendedSlot");
+
+    // Listener untuk availableSlot
+    _availableSlotRef.onValue.listen((DatabaseEvent event) {
       if (event.snapshot.value != null) {
         availableSlot = event.snapshot.value.toString();
         notifyListeners();
       }
     }, onError: (error) {
-      debugPrint("Error mengambil data slot: $error");
+      debugPrint("Error mengambil data availableSlot: $error");
+    });
+
+    // Listener untuk recommendedSlot
+    _recommendedSlotRef.onValue.listen((DatabaseEvent event) {
+      if (event.snapshot.value != null) {
+        recommendedSlot = event.snapshot.value.toString();
+        notifyListeners();
+      }
+    }, onError: (error) {
+      debugPrint("Error mengambil data recommendedSlot: $error");
     });
   }
 

@@ -105,10 +105,22 @@ class ParkiramAvailable extends StatelessWidget {
                             positionFactor: 0,
                             widget: Column(
                               mainAxisSize: MainAxisSize.min,
-                              children: const [
-                                Image(
-                                  image: AssetImage("assets/images/car.png"),
-                                  height: 180,
+                              children: [
+                                Text(
+                                  ("Slot Terdekat"),
+                                  style: TextStyle(
+                                    fontSize: 24,
+                                    fontWeight: FontWeight.w500,
+                                    color: Color.fromARGB(255, 3, 5, 94),
+                                  ),
+                                ),
+                                Text(
+                                  viewModel.recommendedSlot,
+                                  style: TextStyle(
+                                    fontSize: 75,
+                                    fontWeight: FontWeight.w500,
+                                    color: Color.fromARGB(255, 3, 5, 94),
+                                  ),
                                 ),
                               ],
                             ),
